@@ -1,4 +1,4 @@
-INSERT INTO director VALUES (1, 'Alfred', 'Hitchcock', '1899-08-13');
+INSERT INTO director VALUES(1, 'Alfred', 'Hitchcock', '1899-08-13');
 INSERT INTO film VALUES (default, 1,'Dial M for Murder', '1954-05-05', 'film noir');
 INSERT INTO film VALUES (default, 1,'Rear Window', '1954-07-11', 'thriller');
 INSERT INTO film VALUES (default, 1,'Vertigo', '1958-01-24', 'film noir');

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,13 +26,16 @@ public class FilmWithDirectorDtoController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<FilmDirectorRespDto>> findByPrefixNameAndByDate(@RequestBody LastNameDatesRequestDto requestDto, BindingResult bindingResult) {
+    public ResponseEntity<List<FilmDirectorRespDto>> findByPrefixNameAndByDate(
+            @Valid
+            @RequestBody LastNameDatesRequestDto requestDto,
+            BindingResult bindingResult) {
+
         validator.validate(requestDto, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            ResponseEntity.badRequest();
+            return ResponseEntity.badRequest().build();
         }
-
         List<FilmDirectorRespDto> filmDtoList = service.findByLastNameAndByDateBetween(requestDto);
 
         return ResponseEntity.ok(filmDtoList);

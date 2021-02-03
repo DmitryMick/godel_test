@@ -9,8 +9,10 @@ import java.sql.Date;
 import java.util.List;
 
 public interface FilmRepository extends JpaRepository<Film, Long> {
-    List<Film> findByDateBetween(Date from, Date until);
 
-    @Query("SELECT f FROM Film f JOIN Director d ON f.director.id = d.id WHERE d.lastName LIKE ?3% AND f.date BETWEEN ?1 AND ?2")
-    List<Film> findByDateBetweenAndDirectorLastNameLike(@Param("from") Date from, @Param("until") Date until, String lastName);
+    @Query("SELECT f FROM Film f JOIN Director d ON f.director.id = d.id WHERE LOWER(d.lastName) LIKE LOWER(CONCAT(:name,'%')) AND f.date >= :after")
+    List<Film> findByDateAfterAndDirectorLastNameLike(@Param("after") Date after, @Param("name") String lastName);
+
+    @Query("SELECT f FROM Film f JOIN Director d ON f.director.id = d.id WHERE LOWER(d.lastName) LIKE LOWER(CONCAT(:name,'%')) AND f.date BETWEEN :from AND :until")
+    List<Film> findByDateBetweenAndDirectorLastNameLike(@Param("from") Date from, @Param("until") Date until, @Param("name") String lastName);
 }

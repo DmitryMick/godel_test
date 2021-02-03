@@ -23,7 +23,7 @@ public class Director {
     @Column(name = "birth_date", nullable = false)
     private Date date;
 
-    @OneToMany(mappedBy = "director",cascade =  CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "director",cascade =  CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     List<Film> films;
 }
 

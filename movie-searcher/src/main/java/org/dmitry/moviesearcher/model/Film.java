@@ -1,6 +1,7 @@
 package org.dmitry.moviesearcher.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -12,7 +13,7 @@ public class Film {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne (fetch =  FetchType.LAZY)
+    @ManyToOne (fetch =  FetchType.EAGER)
     @JoinColumn(name = "director_id")
     private Director director;
 
