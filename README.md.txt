@@ -1,6 +1,6 @@
 #developed by Dmitry Mikhalko
 
-#application capabilities are described in the searchcher.pdf file in the same package. 
+#application capabilities are described in the searcher_test.pdf file in the same package. 
 #instructions for launching the application are presented below.
 
 1. Сheck the **JRE version** on the system - not less than **version 11.**    
