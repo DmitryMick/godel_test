@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,18 +17,27 @@ public class ErrorResponse {
     private HttpStatus status;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime timestamp;
+    private String message;
     private List<ErrorEntity> errors;
 
     private ErrorResponse() {
         timestamp = LocalDateTime.now();
+        this.errors = new ArrayList<>();
     }
 
-    ErrorResponse(HttpStatus status) {
+    public ErrorResponse(HttpStatus status) {
         this();
+        this.message = "Unexpected error";
         this.status = status;
     }
 
-    ErrorResponse(HttpStatus status, List<ErrorEntity> errors) {
+    public ErrorResponse(HttpStatus status, String message) {
+        this();
+        this.status = status;
+        this.message = message;
+    }
+
+    public ErrorResponse(HttpStatus status, List<ErrorEntity> errors) {
         this(status);
         this.errors = errors;
     }

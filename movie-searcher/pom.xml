@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.dmitry</groupId>
     <artifactId>movie-searcher</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>movie-searcher</name>
     <description>test project</description>
     <properties>

@@ -1,4 +1,4 @@
-package org.dmitry.moviesearcher.exceptionhandler.exception;
+package org.dmitry.moviesearcher.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +10,6 @@ import org.springframework.validation.BindingResult;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvalidDataRequestException extends Throwable {
+public class InvalidDataRequestException extends RuntimeException {
     private BindingResult bindingResult;
 }

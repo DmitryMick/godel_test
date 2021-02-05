@@ -2,7 +2,7 @@ package org.dmitry.moviesearcher.controller;
 
 import org.dmitry.moviesearcher.dto.FilmDirectorRespDto;
 import org.dmitry.moviesearcher.dto.LastNameDatesRequestDto;
-import org.dmitry.moviesearcher.exceptionhandler.exception.InvalidDataRequestException;
+import org.dmitry.moviesearcher.exception.InvalidDataRequestException;
 import org.dmitry.moviesearcher.service.FilmWithDirectorService;
 import org.dmitry.moviesearcher.validator.LastNameDatesRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class FilmWithDirectorDtoController {
     public ResponseEntity<?> findByPrefixNameAndByDate(
             @Valid
             @RequestBody LastNameDatesRequestDto requestDto,
-            BindingResult bindingResult) throws InvalidDataRequestException {
+            BindingResult bindingResult) {
 
         validator.validate(requestDto, bindingResult);
 

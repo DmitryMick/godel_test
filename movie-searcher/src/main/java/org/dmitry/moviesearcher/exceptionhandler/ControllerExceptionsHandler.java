@@ -1,7 +1,8 @@
 package org.dmitry.moviesearcher.exceptionhandler;
 
-import org.dmitry.moviesearcher.exceptionhandler.exception.InvalidDataRequestException;
+import org.dmitry.moviesearcher.exception.InvalidDataRequestException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -20,5 +21,13 @@ public class ControllerExceptionsHandler {
                 .collect(Collectors.toList());
 
         return new ErrorResponse(HttpStatus.BAD_REQUEST, errors);
+    }
+
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleException(HttpMessageNotReadableException exception) {
+        String message = exception.getCause().getMessage();
+
+        return new ErrorResponse(HttpStatus.BAD_REQUEST, message);
     }
 }
