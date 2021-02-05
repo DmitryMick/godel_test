@@ -2,6 +2,7 @@ package org.dmitry.moviesearcher.controller;
 
 import org.dmitry.moviesearcher.dto.FilmDirectorRespDto;
 import org.dmitry.moviesearcher.dto.LastNameDatesRequestDto;
+import org.dmitry.moviesearcher.exceptionhandler.exception.InvalidDataRequestException;
 import org.dmitry.moviesearcher.service.FilmWithDirectorService;
 import org.dmitry.moviesearcher.validator.LastNameDatesRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +26,18 @@ public class FilmWithDirectorDtoController {
         this.validator = validator;
     }
 
-    @GetMapping()
-    public ResponseEntity<List<FilmDirectorRespDto>> findByPrefixNameAndByDate(
+    @GetMapping("/")
+    public ResponseEntity<?> findByPrefixNameAndByDate(
             @Valid
             @RequestBody LastNameDatesRequestDto requestDto,
-            BindingResult bindingResult) {
+            BindingResult bindingResult) throws InvalidDataRequestException {
 
         validator.validate(requestDto, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().build();
+            throw new InvalidDataRequestException(bindingResult);
         }
+
         List<FilmDirectorRespDto> filmDtoList = service.findByLastNameAndByDateBetween(requestDto);
 
         return ResponseEntity.ok(filmDtoList);

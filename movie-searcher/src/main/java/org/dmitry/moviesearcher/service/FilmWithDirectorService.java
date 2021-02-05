@@ -28,6 +28,7 @@ public class FilmWithDirectorService {
 
     public List<FilmDirectorRespDto> findByLastNameAndByDateBetween(LastNameDatesRequestDto requestDto) {
         String lastName = Objects.requireNonNullElse(requestDto.getLastName(), "");
+
         Date from = Objects.requireNonNullElse(requestDto.getFrom(), Date.valueOf(firstDate));
         Date until = requestDto.getUntil();
 
@@ -44,7 +45,7 @@ public class FilmWithDirectorService {
 
     public List<FilmDirectorRespDto> getDtoFromFilms(List<Film> films) {
         List<FilmDirectorRespDto> dtoList = new ArrayList<>();
-        films.parallelStream().forEach(f -> dtoList.add(getDtoResp(f)));
+        films.forEach(f -> dtoList.add(getDtoResp(f)));
 
         return dtoList;
     }
